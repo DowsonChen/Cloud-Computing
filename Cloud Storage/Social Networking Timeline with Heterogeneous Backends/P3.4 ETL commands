@@ -1,0 +1,85 @@
+Front End DNS : ec2-52-87-198-4.compute-1.amazonaws.com
+
+Back End DNS : ec2-54-165-123-77.compute-1.amazonaws.com
+
+
+cd /home/ubuntu/SN2
+npm start
+
+cd /home/ubuntu/Project3_4
+mvn clean package
+mvn exec:java
+
+
+scp -i project3.pem -r ubuntu@ec2-54-165-123-77.compute-1.amazonaws.com:/home/ubuntu/Project3_4/src/main/java/cc/cmu/edu/minisite ./Codes
+
+scp -i project3.pem Codes/minisite/ProfileServlet.java ubuntu@ec2-54-165-123-77.compute-1.amazonaws.com:/home/ubuntu/Project3_4/src/main/java/cc/cmu/edu/minisite
+
+MySQL endpoint : dongsongmysql.cmzyt7fdioxc.us-east-1.rds.amazonaws.com:3306
+
+export PATH=${PATH}:/usr/local/mysql/bin
+mysql -h dongsongmysql.cmzyt7fdioxc.us-east-1.rds.amazonaws.com -u dowson -p --local-infile
+
+mysql> create table users(
+    -> id INT NOT NULL PRIMARY KEY,
+    -> password VARCHAR(255) NOT NULL
+    -> );
+
+mysql> create table usersinfo(
+    -> id INT NOT NULL PRIMARY KEY,
+    -> name VARCHAR(25) NOT NULL,
+    -> profile VARCHAR(255)
+    -> );
+
+
+LOAD DATA LOCAL INFILE '/home/ubuntu/users.csv'
+INTO TABLE users
+FIELDS TERMINATED BY ',';
+
+LOAD DATA LOCAL INFILE '/home/ubuntu/userinfo.csv'
+INTO TABLE usersinfo
+FIELDS TERMINATED BY ',';
+
+TRUNCATE TABLE users
+
+
+
+
+ssh -i project3.pem hadoop@ec2-54-173-64-105.compute-1.amazonaws.com
+
+hadoop fs -ls /
+
+hadoop fs -mkdir /follower
+hadoop fs -mkdir /followee
+
+hadoop fs -ls /follower
+
+hadoop distcp s3n://dongsongbucket/follower.csv /follower
+hadoop distcp s3n://dongsongbucket/followee.csv /followee
+
+create 'follower','data'
+create 'followee','data'
+
+disable 'relation'
+drop 'relation'
+
+hbase org.apache.hadoop.hbase.mapreduce.ImportTsv -Dimporttsv.columns=HBASE_ROW_KEY,data:followers follower /follower/follower.csv
+hbase org.apache.hadoop.hbase.mapreduce.ImportTsv -Dimporttsv.columns=HBASE_ROW_KEY,data:followees followee /followee/followee.csv
+
+
+mongod     mongo
+
+mongoimport --h ec2-54-85-63-121.compute-1.amazonaws.com --db dowson --collection post -- type json --file posts.json --jsonArray
+
+db.people.getIndexes()
+
+db.post.createIndex( { uid: 1 } )
+
+
+
+mysql> create table links(
+    -> followee INT NOT NULL,
+    -> follower INT NOT NULL
+    -> );
+
+CREATE INDEX follower ON links (follower)

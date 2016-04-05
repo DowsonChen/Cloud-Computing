@@ -1,0 +1,14 @@
+http://stackoverflow.com/questions/24104313/how-to-delay-in-java
+
+http://stackoverflow.com/questions/4180097/gae-how-do-i-read-url-response-line-by-line
+
+http://stackoverflow.com/questions/3324717/sending-http-post-request-in-java
+
+https://dzone.com/articles/how-send-http-post-request
+
+http://stackoverflow.com/questions/3481828/how-to-split-a-string-in-java
+
+http://download.java.net/jdk7/archive/b123/docs/api/java/net/HttpURLConnection.html#HTTP_BAD_REQUEST
+
+http://www.restapitutorial.com/httpstatuscodes.html
+

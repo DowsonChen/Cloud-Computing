@@ -1,0 +1,12 @@
+http://stackoverflow.com/questions/9123272/is-there-a-way-to-pass-parameters-to-a-runnable
+
+http://stackoverflow.com/questions/5853167/runnable-with-a-parameter
+
+http://stackoverflow.com/questions/877096/how-can-i-pass-a-parameter-to-a-java-thread
+
+http://stackoverflow.com/questions/4180097/gae-how-do-i-read-url-response-line-by-line
+
+http://stackoverflow.com/questions/3324717/sending-http-post-request-in-java
+
+https://dzone.com/articles/how-send-http-post-request
+
