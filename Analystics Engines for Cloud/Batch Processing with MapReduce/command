@@ -1,0 +1,10 @@
+cd /mnt
+wget http://s3.amazonaws.com/cmucc-datasets/enwiki-20160204-pages
+hadoop fs -put ./enwiki-20160204-pages /temp
+hadoop jar wordcount.jar WordCount /temp /result
+
+
+create 'model','data'
+mkdir class
+jar -cvf languagemodel.jar -C ./class .
+

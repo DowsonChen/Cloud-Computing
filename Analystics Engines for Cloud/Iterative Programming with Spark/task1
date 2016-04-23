@@ -1,0 +1,7 @@
+val twitterGraph = sc.textFile("hdfs:///TwitterGraph.txt")
+val user = twitterGraph.flatMap(line => line.split("\\s+")).map(id => (id, 1)).reduceByKey(_ + _)
+user.count()
+res0: Long = 2315848
+val edgeNum = twitterGraph.map(edge => (edge, 1)).reduceByKey(_ + _)
+edgeNum.count()
+res1: Long = 517970363
